@@ -1,0 +1,70 @@
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+	text-transform: uppercase;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	color: #000;
+	background: lightcoral;
+	font-family: "Roboto";
+	font-weight: normal;
+	color: #fff;
+}
+
+body {
+	line-height: 1.42;
+}
+
+a {
+	transition: 300ms;
+	text-decoration: none;
+		color: #419df4;
+		&:hover, &:focus {
+			color: #000;
+		}
+}
+
+ul {
+	margin: 0px;
+	padding: 0px;
+}
+
+li {
+	margin: 0;
+	padding: 0;
+}
+
+textarea::placeholder, input::placeholder {
+  color: #000;
+}
+
+textarea::value, input::value {
+  color: #000;
+}
+
+button {
+	outline: none;
+	background-color: orange;
+	color: #fff;
+	border-style: none;
+	cursor: pointer;
+	font-size: 14px;
+	display: block;
+	margin: 0 auto;
+	border-radius: 5px;
+	transition: 0.3s;
+	&:hover, &:focus {
+		background-color: pink;
+	}
+}
