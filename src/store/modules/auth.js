@@ -2,9 +2,11 @@ import axios from "axios";
 
 axios.defaults.baseURL = 'http://localhost:8080'
 
+const token = localStorage.getItem('token');
+
 const state = {
 	status: '',
-	token: localStorage.getItem('token') || '',
+	token: token ? `Bearer ${token}` : null,
 	user: null
 };
 
@@ -33,7 +35,7 @@ const actions = {
 				const token = resp.data.token
 				const userId = resp.data.userId
 				localStorage.setItem('token', token)
-				axios.defaults.headers.common['Authorization'] = token
+				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 				commit('auth_success', { token, user })
 				resolve(resp)
 			})

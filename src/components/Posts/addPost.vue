@@ -61,7 +61,7 @@
         let formData = new FormData();
         formData.append("title", this.title);
         formData.append("content", this.content);
-        formData.append("userfile", this.files);
+        formData.append("image", this.files[0]);
 				this.$store.dispatch('postMessage', formData)
 				.then(() => this.$router.push('/posts'))
 				.catch(err => console.log(err))
