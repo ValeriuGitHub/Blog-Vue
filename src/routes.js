@@ -6,6 +6,8 @@ import Login from './components/Auth/Login.vue';
 import Register from './components/Auth/Register.vue';
 import Home from './components/Home.vue';
 import Posts from './components/Posts/Posts.vue';
+import Post from './components/Posts/Post.vue';
+import editPost from './components/Posts/editPost.vue';
 import addPost from './components/Posts/addPost.vue';
 
 Vue.use(Router);
@@ -32,6 +34,22 @@ let router = new Router({
 	    path: '/add-post',
 	    name: 'addPost',
 	    component: addPost,
+	    meta: {
+	      requiresAuth: true
+	    }
+	  },
+	  {
+	    path: '/post',
+	    name: 'post',
+	    component: Post,
+	    meta: {
+	      requiresAuth: true
+	    }
+	  },
+	  {
+	    path: '/edit-post',
+	    name: 'editpost',
+	    component: editPost,
 	    meta: {
 	      requiresAuth: true
 	    }

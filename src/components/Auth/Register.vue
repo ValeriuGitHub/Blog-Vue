@@ -4,7 +4,9 @@
 			<header class="card-header">
 				<h4 class="card-title mt-2">Sign up</h4>
 				<button class="signup-btn">
-					<router-link to="/login" class="sign-link" activeClass="active" tag="a">Log in</router-link>
+					<router-link to="/login" class="sign-link" activeClass="active" tag="a">
+						Log in
+					</router-link>
 				</button>
 			</header>
 			<article class="card-body">
@@ -89,7 +91,10 @@
 			</article>
 			<div class="border-top card-body text-center">
 				<span class="link-margin">Have an account?</span>
-				<router-link to="/login" class="signup-link" activeClass="active" tag="a">Log in</router-link></div>
+				<router-link to="/login" class="signup-link" activeClass="active" tag="a">
+					Log in
+				</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -101,8 +106,7 @@
 				name : "",
 				email : "",
 				password : "",
-				password_confirmation : "",
-				is_admin : null
+				password_confirmation : ""
 			}
 		},
 		methods: {
@@ -114,7 +118,7 @@
 					is_admin: this.is_admin
 				}
 				this.$store.dispatch('register', data)
-				.then(() => this.$router.push('/'))
+				.then(() => this.$router.push('/login'))
 				.catch(err => console.log(err))
 			}
 		}

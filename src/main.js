@@ -6,18 +6,23 @@ import App from './App.vue';
 import router from './routes';
 import store from './store/store';
 
-// Vue.use(VueRouter);
-
-// const router = new VueRouter({
-//   mode: 'history',
-//   routes
-// });
-
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token')
 if (token) {
   Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
+
+const reqInterceptor = Axios.interceptors.request.use(config => {
+  console.log('Request Interceptor', config)
+  return config
+})
+const resInterceptor = Axios.interceptors.response.use(res => {
+  console.log('Response Interceptor', res)
+  return res
+})
+
+Axios.interceptors.request.eject(reqInterceptor)
+Axios.interceptors.response.eject(resInterceptor)
 
 new Vue({
   el: '#app',

@@ -12,7 +12,7 @@
 						v-model="title">
 					<textarea
 						name="message" id="message" class="post-message" cols="30" rows="10" placeholder="Write a message and add files if it needs to..."
-						v-model="message">
+						v-model="content">
 					</textarea>
 					<div class="form-group file-submit">
 						<div class="file-group">
@@ -29,7 +29,13 @@
 							</svg>
 							<span>Choose a file…</span></label>
 						</div>
-						<input @click="postMessage" value="Post" class="btn float-right login_btn">
+						<form @submit.prevent="postMessage">
+							<button
+							  type="submit"
+							  class="btn float-right login_btn">
+							  Post
+							</button>
+						</form>
 					</div>
 				</form>
 			</div>
@@ -39,10 +45,9 @@
 
 <script>
 	export default {
-		props: ['post'],
     data() {
       return {
-        message: '',
+        content: '',
         title: '',
         files: []
       }
@@ -53,15 +58,13 @@
 		  },
 			postMessage() {
         this.previewFiles()
-        const postData = {
-          title: this.title,
-          message: this.message,
-          files: this.files
-        };
-        console.log(this.title);
-        console.log(this.message);
-        console.log(this.files)
-				this.$store.dispatch('postMessage', postData);
+        let formData = new FormData();
+        formData.append("title", this.title);
+        formData.append("content", this.content);
+        formData.append("userfile", this.files);
+				this.$store.dispatch('postMessage', formData)
+				.then(() => this.$router.push('/posts'))
+				.catch(err => console.log(err))
 			}
 		}
 	}
@@ -69,8 +72,6 @@
 </script>
 
 <style lang="scss">
-
-@import '../.././scss/index.scss';
 
 .post {
 	&-message {
