@@ -9,7 +9,7 @@
 					<router-link to="/login" activeClass="active" tag="li"><a>Sign in</a></router-link>
 					<router-link to="/register" activeClass="active" tag="li"><a>Sign up</a></router-link>
 					<router-link to="/add-post" activeClass="active" tag="li"><a>Add Post</a></router-link>
-					<router-link to="/edit-post" activeClass="active" tag="li"><a>Edit Post</a></router-link>
+					<!-- <router-link to="/edit-post" tag="li"><a>Edit Post</a></router-link> -->
 					<router-link to="/posts" activeClass="active" tag="li"><a>Posts</a></router-link>
 				</ul>
 			</div>

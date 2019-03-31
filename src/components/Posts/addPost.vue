@@ -31,9 +31,9 @@
 						</div>
 						<form @submit.prevent="postMessage">
 							<button
-							  type="submit"
-							  class="btn float-right login_btn">
-							  Post
+								type="submit"
+								class="btn float-right login_btn">
+								Post
 							</button>
 						</form>
 					</div>
@@ -45,23 +45,23 @@
 
 <script>
 	export default {
-    data() {
-      return {
-        content: '',
-        title: '',
-        files: []
-      }
-    },
+		data() {
+			return {
+				content: '',
+				title: '',
+				files: []
+			}
+		},
 		methods: {
 			previewFiles() {
-		    this.files = this.$refs.myFiles.files;
-		  },
+				this.files = this.$refs.myFiles.files;
+			},
 			postMessage() {
-        this.previewFiles()
-        let formData = new FormData();
-        formData.append("title", this.title);
-        formData.append("content", this.content);
-        formData.append("image", this.files[0]);
+				this.previewFiles()
+				let formData = new FormData();
+				formData.append("title", this.title);
+				formData.append("content", this.content);
+				formData.append("image", this.files[0]);
 				this.$store.dispatch('postMessage', formData)
 				.then(() => this.$router.push('/posts'))
 				.catch(err => console.log(err))
@@ -76,8 +76,8 @@
 .post {
 	&-message {
 		width: 360px;
-    border: 2px solid darkgoldenrod;
-    border-radius: 10px;
+		border: 2px solid darkgoldenrod;
+		border-radius: 10px;
 		height: 160px;
 		color: #000;
 		font-family: 'Roboto';
@@ -87,63 +87,80 @@
 		margin-bottom: 5px;
 		padding-top: 7.5px;
 		padding-left: 20px;
-    text-align: justify;
+		text-align: justify;
+		&_big {
+			width: 450px;
+		}
 	}
 }
 input::placeholder {
 	color: rgba(#000, 0.5);
 }
+.card {
+	padding: 30px 20px;
+	&-edit {
+		padding: 30px 50px;
+	}
+}
 .file {
 	&-submit {
 		display: flex;
 		justify-content: space-between;
-    align-items: center;
-    padding: 0 6px;
+		align-items: center;
 	}
 }
 .input-title {
-  width: 360px;
-  border-radius: 5px;
-  padding: 10px 10px;
-  border: 2px solid darkgoldenrod;
-  color: #000;
-  font-size: 18px;
-  outline: none;
-  font-weight: bold;
-  text-align: center;
+	width: 360px;
+	border-radius: 5px;
+	padding: 10px 10px;
+	border: 2px solid darkgoldenrod;
+	color: #000;
+	font-size: 18px;
+	outline: none;
+	font-weight: bold;
+	text-align: center;
+	&_big {
+		width: 450px;
+	}
 }
 .inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-  & + label {
-    font-size: 14px;
-    font-weight: 700;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    padding: 9px 10px;
-    border-radius: 5px;
-    margin: 0;
-    margin-top: 6px;
-    & svg {
-	    width: 1em;
-	    height: 1em;
-	    vertical-align: middle;
-	    fill: currentColor;
-	    margin-top: -0.25em;
-	    margin-right: 0.25em;
-    }
-  }
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	& + label {
+		font-size: 14px;
+		font-weight: 700;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		cursor: pointer;
+		display: inline-block;
+		overflow: hidden;
+		padding: 9px 10px;
+		border-radius: 5px;
+		margin: 0;
+		margin-top: 6px;
+		& svg {
+			width: 1em;
+			height: 1em;
+			vertical-align: middle;
+			fill: currentColor;
+			margin-top: -0.25em;
+			margin-right: 0.25em;
+		}
+	}
 }
 .inputfile-1 + label {
-  color: #fff6fe;
-  background-color: #ff6f61;
+	color: #fff6fe;
+	background-color: #ff6f61;
+	transition: 0.3s;
+	&:hover {
+		background-color: #fff;
+		color: #ff6f61;
+		transition: 0.3s;
+	}
 }
 
 </style>

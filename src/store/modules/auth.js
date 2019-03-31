@@ -46,22 +46,6 @@ const actions = {
 			})
 		})
 	},
-  postMessage: ({commit}, formData) => {
-    commit('POST_MESSAGE', formData);
-		// return new Promise((resolve, reject) => {
-		// 	axios({url: '/feed/post', data: formData, method: 'POST' })
-		// 	.then(resp => {
-		// 		console.log(postData)
-		// 		console.log(resp.data)
-		// 		resolve(resp)
-		// 	})
-		// 	.catch(err => {
-		// 		console.log(err)
-		// 		localStorage.removeItem('token')
-		// 		reject(err)
-		// 	})
-		// })
-  },
 	register({commit}, user){
 		return new Promise((resolve, reject) => {
 			axios({url: '/auth/signup', data: user, method: 'POST' })
@@ -71,7 +55,7 @@ const actions = {
 				const userId = resp.data.userId
 				const message = resp.data.message
 				localStorage.setItem('token', token)
-				axios.defaults.headers.common['Authorization'] = token
+				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 				commit('auth_success', { token, user })
 				resolve(resp)
 			})
