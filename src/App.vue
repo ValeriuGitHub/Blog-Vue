@@ -16,18 +16,18 @@
 <script>
 	import Header from './components/Header.vue';
 	export default {
-	  created: function () {
-	  	this.$router.push('/posts')
-	    this.$http.interceptors.response.use(undefined, function (err) {
-	      return new Promise(function (resolve, reject) {
-	        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-	          this.$store.dispatch('logout')
-	          this.$router.push('/login')
-	        }
-	        throw err;
-	      });
-	    });
-	  },
+		created: function () {
+			this.$router.push('/posts')
+			this.$http.interceptors.response.use(undefined, function (err) {
+				return new Promise(function (resolve, reject) {
+					if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+						this.$store.dispatch('logout')
+						this.$router.push('/login')
+					}
+					throw err;
+				});
+			});
+		},
 		components: {
 			appHeader: Header
 		}
@@ -46,7 +46,7 @@
 
 	.centered {
 		display: flex;
-    justify-content: start;
+		justify-content: start;
 	}
 
 	.sign-link {

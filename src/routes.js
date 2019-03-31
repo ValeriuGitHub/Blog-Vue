@@ -16,65 +16,65 @@ let router = new Router({
 	mode: 'history',
 	routes: [
 		{
-	    path: '/',
-	    name: 'home',
-	    component: Home
-	  },
-	  {
-	    path: '/login',
-	    name: 'login',
-	    component: Login
-	  },
-	  {
-	    path: '/register',
-	    name: 'register',
-	    component: Register
-	  },
-	  {
-	    path: '/add-post',
-	    name: 'addPost',
-	    component: addPost,
-	    meta: {
-	      requiresAuth: true
-	    }
-	  },
-	  {
-	    path: '/post',
-	    name: 'post',
-	    component: Post,
-	    meta: {
-	      requiresAuth: true
-	    }
-	  },
-	  {
-	    path: '/edit-post',
-	    name: 'editpost',
-	    component: editPost,
-	    meta: {
-	      requiresAuth: true
-	    }
-	  },
-	  {
-	    path: '/posts',
-	    name: 'posts',
-	    component: Posts,
-	    meta: {
-	      requiresAuth: true
-	    }
-	  }
-  ]
+			path: '/',
+			name: 'home',
+			component: Home
+		},
+		{
+			path: '/login',
+			name: 'login',
+			component: Login
+		},
+		{
+			path: '/register',
+			name: 'register',
+			component: Register
+		},
+		{
+			path: '/add-post',
+			name: 'addPost',
+			component: addPost,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/post',
+			name: 'post',
+			component: Post,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/edit-post',
+			name: 'editpost',
+			component: editPost,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/posts',
+			name: 'posts',
+			component: Posts,
+			meta: {
+				requiresAuth: true
+			}
+		}
+	]
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
-      next()
-      return
-    }
-    next('/login')
-  } else {
-    next()
-  }
+	if(to.matched.some(record => record.meta.requiresAuth)) {
+		if (store.getters.isLoggedIn) {
+			next()
+			return
+		}
+		next('/login')
+	} else {
+		next()
+	}
 })
 
 export default router

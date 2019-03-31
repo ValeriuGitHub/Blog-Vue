@@ -5,7 +5,7 @@
 				<h3>Edit Post</h3>
 				<form @submit.prevent="deletePost" class="edit-remove__container">
 					<button class="edit-remove">
-							Remove Post
+						Remove Post
 					</button>
 				</form>
 			</div>
@@ -65,11 +65,6 @@
 				title: '',
 				content: '',
 				files: []
-			}
-		},
-		computed: {
-			editPosts() {
-				return this.$store.getters.editPosts;
 			}
 		},
 		methods: {

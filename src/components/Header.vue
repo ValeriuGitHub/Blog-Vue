@@ -26,16 +26,16 @@
 
 	export default {
 		computed : {
-      isLoggedIn: function(){ return this.$store.getters.isLoggedIn }
-    },
-    methods: {
-      logout: function () {
-        this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/login')
-        })
-      }
-    },
+			isLoggedIn: function(){ return this.$store.getters.isLoggedIn }
+		},
+		methods: {
+			logout: function () {
+				this.$store.dispatch('logout')
+				.then(() => {
+					this.$router.push('/login')
+				})
+			}
+		},
 	}
 
 </script>
@@ -46,16 +46,16 @@
 
 .logout {
 	&-wrapper {
-    margin-left: auto;
+		margin-left: auto;
 	}
 	&-link {
 		position: relative;
-    display: block;
-    padding: 15px;
-    cursor: pointer;
-    line-height: 20px;
+		display: block;
+		padding: 15px;
+		cursor: pointer;
+		line-height: 20px;
 		color: #fff;
-    font-size: 16px;
+		font-size: 16px;
 		&:hover {
 			opacity: 0.7;
 			text-decoration: none;

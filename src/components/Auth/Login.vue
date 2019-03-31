@@ -141,12 +141,12 @@
 	color: black;
 	background-color: $orange;
 	width: 100px;
-  padding: 7.6px 12px;
-  &_big {
-  	padding: 7.6px 44px;
-  	font-weight: bold;
-  	width: auto;
-  }
+	padding: 7.6px 12px;
+	&_big {
+		padding: 7.6px 44px;
+		font-weight: bold;
+		width: auto;
+	}
 	&:hover {
 		color: black;
 		background-color: white;
