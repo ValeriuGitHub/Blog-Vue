@@ -1,39 +1,44 @@
 <template>
 	<div>
 		<app-post v-for="post in posts" :post="post"></app-post>
-		<app-pagination></app-pagination>
+		<pagination
+		  :data="laravelData"
+			@pagination-change-page="getResults">
+				<span slot="prev-nav">&lt; Previous</span>
+				<span slot="next-nav">Next &gt;</span>
+		</pagination>
 	</div>
 </template>
 
 <script>
 	import Post from './Post.vue';
-	import Pagination from './Pagination.vue';
 	import axios from 'axios';
 
 	export default {
 		components: {
-			appPost: Post,
-			appPagination: Pagination
+			appPost: Post
 		},
 		computed: {
 			posts() {
 				return this.$store.getters.posts;
 			}
 		},
-		created() {
-			return new Promise((resolve, reject) => {
-				axios({url: `/feed/posts?page=${1}&postsPerPage=${5}`, method: 'GET' })
-					.then(resp => {
-						this.$store.state.posts = resp.data;
-						console.log(resp.data)
-						resolve(resp)
-					})
-					.catch(err => {
-						console.log(err)
-						localStorage.removeItem('token')
-						reject(err)
-					})
-			})
+		data() {
+			return {
+				laravelData: {}
+			}
+		},
+		mounted() {
+			this.getResults();
+		},
+		methods: {
+			getResults(page = 1) {
+				axios({url: `/feed/posts?page=${page}&postsPerPage=${5}`, method: 'GET' })
+					.then(response => {
+						this.laravelData = response.data
+						this.$store.state.posts = response.data
+					});
+			}
 		}
 	}
 </script>
