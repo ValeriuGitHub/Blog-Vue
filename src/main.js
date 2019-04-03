@@ -12,8 +12,6 @@ if (token) {
 	Vue.prototype.$http.defaults.headers.common['Authorization'] = token
 }
 
-Vue.component('pagination', require('laravel-vue-pagination'));
-
 new Vue({
 	el: '#app',
 	router,

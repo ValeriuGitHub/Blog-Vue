@@ -87,7 +87,6 @@
 		margin-bottom: 5px;
 		padding-top: 7.5px;
 		padding-left: 20px;
-		text-align: justify;
 		&_big {
 			width: 450px;
 		}

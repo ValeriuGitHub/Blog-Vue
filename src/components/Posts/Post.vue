@@ -3,7 +3,7 @@
 		<div class="well">
 			<div class="media">
 				<div class="pull-left">
-<!-- 	    		<img class="media-object" :src="post.imageUrl"> -->
+					<img class="media-object" :src="'http://localhost:8080/' + post.imageUrl">
 				</div>
 				<div class="media-body">
 					<h4 class="media-heading">{{ post.title }}</h4>
@@ -96,6 +96,10 @@
 		display: flex;
 		flex-direction: column;
 		align-content: space-between;
+	}
+	&-object {
+		object-fit: contain;
+		width: 200px;
 	}
 }
 .list {

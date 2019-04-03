@@ -13,13 +13,13 @@
 				<form>
 					<input
 						type="text" name="title" id="title" autocomplete="off"
-						:placeholder="post.title"
+						:value="editPost.title"
 						class="edit-title input-title input-title_big"
 						v-model="title">
 					<textarea
 						name="message" id="message" class="edit-content post-message  post-message_big"
 						cols="30" rows="10"
-						:placeholder="post.content"
+						:value="editPost.content"
 						v-model="content">
 					</textarea>
 					<div class="form-group file-submit">
@@ -37,8 +37,8 @@
 							</svg>
 							<span>Choose another file…</span></label>
 						</div>
-						<form>
-							<button @submit.prevent="changePost"
+						<form @submit.prevent="changePost">
+							<button
 								type="submit"
 								class="btn float-right login_btn login_btn_big">
 								Change Post
@@ -58,13 +58,16 @@
 
 <script>
 	export default {
-		props: ['post'],
 		data() {
 			return {
-				id: this.post._id,
 				title: '',
 				content: '',
 				files: []
+			}
+		},
+		computed: {
+			editPost() {
+				return this.$store.getters.editPost.post;
 			}
 		},
 		methods: {
@@ -77,12 +80,15 @@
 				formData.append("title", this.title);
 				formData.append("content", this.content);
 				formData.append("image", this.files[0]);
-				this.$store.dispatch('changePost', formData, this.id)
+				this.$store.dispatch('changePost', {
+					formData: formData,
+					id: this.editPost._id
+				})
 				.then(() => this.$router.push('/posts'))
 				.catch(err => console.log(err))
 			},
 			deletePost() {
-				this.$store.dispatch('deletePost', this.id)
+				this.$store.dispatch('deletePost', this.editPost._id)
 				.then(() => this.$router.push('/posts'))
 				.catch(err => console.log(err))
 			}

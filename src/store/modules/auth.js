@@ -7,22 +7,26 @@ const token = localStorage.getItem('token');
 const state = {
 	status: '',
 	token: token ? `Bearer ${token}` : null,
-	user: null
+	user: null,
+	editPost: []
 };
 
 const mutations = {
-	auth_success(state, { token, user }){
+	'AUTH_SUCCESS'(state, { token, user }){
 		state.status = 'success'
 		state.token = token
 		state.user = user
 		console.log(state.status);
 	},
-	auth_error(state){
+	'AUTH_ERROR'(state){
 		state.status = 'error'
 	},
-	logout(state){
+	'LOGOUT'(state){
 		state.status = ''
 		state.token = ''
+	},
+	'EDIT_POST'(state, resp) {
+		state.editPost = resp.data;
 	}
 };
 
@@ -36,11 +40,11 @@ const actions = {
 				const userId = resp.data.userId
 				localStorage.setItem('token', token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-				commit('auth_success', { token, user })
+				commit('AUTH_SUCCESS', { token, user })
 				resolve(resp)
 			})
 			.catch(err => {
-				commit('auth_error')
+				commit('AUTH_ERROR')
 				localStorage.removeItem('token')
 				reject(err)
 			})
@@ -56,11 +60,60 @@ const actions = {
 				const message = resp.data.message
 				localStorage.setItem('token', token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-				commit('auth_success', { token, user })
+				commit('AUTH_SUCCESS', { token, user })
 				resolve(resp)
 			})
 			.catch(err => {
-				commit('auth_error', err)
+				commit('AUTH_ERROR', err)
+				localStorage.removeItem('token')
+				reject(err)
+			})
+		})
+	},
+	editPost: ({commit}, id) => {
+		console.log(id);
+		return new Promise((resolve, reject) => {
+			axios({url: `/feed/post/${id}`, method: 'GET' })
+			.then(resp => {
+				console.log(resp.data)
+				commit('EDIT_POST', resp)
+				resolve(resp)
+			})
+			.catch(err => {
+				console.log(err)
+				localStorage.removeItem('token')
+				reject(err)
+			})
+		})
+	},
+	changePost: ({commit}, { formData, id }) => {
+		console.log(id);
+		console.log(formData);
+		return new Promise((resolve, reject) => {
+			axios({url: `/feed/post/${id}`, data: formData, method: 'PUT' })
+			.then(resp => {
+				console.log(resp.data)
+				console.log('change')
+				resolve(resp)
+			})
+			.catch(err => {
+				console.log(err)
+				localStorage.removeItem('token')
+				reject(err)
+			})
+		})
+	},
+	deletePost: ({commit}, id) => {
+		console.log(id);
+		return new Promise((resolve, reject) => {
+			axios({url: `/feed/post/${id}`, method: 'DELETE' })
+			.then(resp => {
+				console.log(resp.data)
+				console.log('delete')
+				resolve(resp)
+			})
+			.catch(err => {
+				console.log(err)
 				localStorage.removeItem('token')
 				reject(err)
 			})
@@ -68,7 +121,7 @@ const actions = {
 	},
 	logout({commit}){
 		return new Promise((resolve, reject) => {
-			commit('logout')
+			commit('LOGOUT')
 			localStorage.removeItem('token')
 			delete axios.defaults.headers.common['Authorization']
 			resolve()
@@ -79,6 +132,7 @@ const actions = {
 const getters = {
 	isLoggedIn: state => !!state.token,
 	authStatus: state => state.status,
+	editPost: state => state.editPost
 };
 
 export default {

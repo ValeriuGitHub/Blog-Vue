@@ -17,7 +17,8 @@
 	import Header from './components/Header.vue';
 	export default {
 		created: function () {
-			this.$router.push('/posts')
+			this.$store.dispatch('logout')
+			this.$router.push('/login')
 			this.$http.interceptors.response.use(undefined, function (err) {
 				return new Promise(function (resolve, reject) {
 					if (err.status === 401 && err.config && !err.config.__isRetryRequest) {

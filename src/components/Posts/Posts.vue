@@ -1,12 +1,6 @@
 <template>
 	<div>
 		<app-post v-for="post in posts" :post="post"></app-post>
-		<pagination
-		  :data="laravelData"
-			@pagination-change-page="getResults">
-				<span slot="prev-nav">&lt; Previous</span>
-				<span slot="next-nav">Next &gt;</span>
-		</pagination>
 	</div>
 </template>
 
@@ -25,18 +19,21 @@
 		},
 		data() {
 			return {
-				laravelData: {}
+				page: 1
 			}
 		},
 		mounted() {
 			this.getResults();
 		},
 		methods: {
-			getResults(page = 1) {
-				axios({url: `/feed/posts?page=${page}&postsPerPage=${5}`, method: 'GET' })
+			getResults() {
+				axios({
+					url: `/feed/posts?page=${this.page}&postsPerPage=${5}`, method: 'GET'
+				})
 					.then(response => {
-						this.laravelData = response.data
+						console.log(response)
 						this.$store.state.posts = response.data
+						console.log(this.$store.state.posts);
 					});
 			}
 		}
