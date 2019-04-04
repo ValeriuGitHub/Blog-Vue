@@ -13,13 +13,13 @@
 				<form>
 					<input
 						type="text" name="title" id="title" autocomplete="off"
-						:value="editPost.title"
+						:placeholder="editPost.title"
 						class="edit-title input-title input-title_big"
 						v-model="title">
 					<textarea
 						name="message" id="message" class="edit-content post-message  post-message_big"
 						cols="30" rows="10"
-						:value="editPost.content"
+						:placeholder="editPost.content"
 						v-model="content">
 					</textarea>
 					<div class="form-group file-submit">
