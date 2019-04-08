@@ -7,50 +7,14 @@
 				</div>
 				<div class="media-body">
 					<h4 class="media-heading">{{ post.title }}</h4>
-					<p class="text-right">By Change after</p>
 					<p>{{ post.content }}</p>
-					<ul class="list-inline list-unstyled">
-						<li>
-							<span>
-								<i class="glyphicon glyphicon-calendar"></i> 2 days, 8 hours
-							</span>
-						</li>
-						<li>|</li>
-						<span><i class="glyphicon glyphicon-comment"></i> 2 comments</span>
-						<li>|</li>
-						<li>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-						</li>
-						<li>|</li>
-						<li>
-							<ul class="post_icon">
-								<li>
-									<a href="https://www.facebook.com/">
-										<i class="fab fa-facebook-square post-icon"></i>
-									</a>
-								</li>
-								<li>
-									<a href="https://plus.google.com/">
-										<i class="fab fa-google-plus-square post-icon"></i>
-									</a>
-								</li>
-								<li>
-									<a href="https://www.twitter.com/">
-										<i class="fab fa-twitter-square post-icon"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
+					<div class="list-inline list-unstyled">
 						<form @submit.prevent="editPost" class="edit-form">
 							<button class="edit-button" :post="post">
 								Edit
 							</button>
 						</form>
-					</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -100,6 +64,9 @@
 	&-object {
 		object-fit: contain;
 		width: 200px;
+	}
+	&-heading {
+		margin-bottom: 20px;
 	}
 }
 .list {

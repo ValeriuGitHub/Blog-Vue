@@ -1,7 +1,5 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://localhost:8080'
-
 const state = {
 	posts: []
 };
@@ -15,27 +13,22 @@ const mutations = {
 
 const actions = {
 	postMessage: ({commit}, formData) => {
-		console.log(formData);
-		return new Promise((resolve, reject) => {
-			axios({url: '/feed/post', data: formData, method: 'POST' })
+		axios({url: '/feed/post', data: formData, method: 'POST' })
 			.then(resp => {
-				console.log(resp.data)
 				commit('POST_MESSAGE', resp)
-				resolve(resp)
 			})
 			.catch(err => {
 				console.log(err)
 				localStorage.removeItem('token')
-				reject(err)
+				throw err
 			})
-		})
 	}
 };
 
 const getters = {
-	posts: state => {
-		return state.posts;
-	}
+	// posts: state => {
+	// 	return state.posts;
+	// }
 };
 
 export default {

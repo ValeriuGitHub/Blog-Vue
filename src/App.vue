@@ -17,7 +17,7 @@
 	import Header from './components/Header.vue';
 	export default {
 		created: function () {
-			this.$store.dispatch('logout')
+			// this.$store.dispatch('logout')
 			this.$router.push('/login')
 			this.$http.interceptors.response.use(undefined, function (err) {
 				return new Promise(function (resolve, reject) {
@@ -36,8 +36,6 @@
 </script>
 
 <style>
-
-	@import ".././node_modules/normalize.css/normalize.css";
 
 	.container-centred {
 		height: calc(100vh - 92px);

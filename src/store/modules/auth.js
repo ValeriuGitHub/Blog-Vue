@@ -1,14 +1,14 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://localhost:8080'
-
 const token = localStorage.getItem('token');
 
 const state = {
 	status: '',
 	token: token ? `Bearer ${token}` : null,
 	user: null,
-	editPost: []
+	editPost: [],
+	posts: [],
+	totalItems: 0
 };
 
 const mutations = {
@@ -16,10 +16,12 @@ const mutations = {
 		state.status = 'success'
 		state.token = token
 		state.user = user
-		console.log(state.status);
 	},
 	'AUTH_ERROR'(state){
 		state.status = 'error'
+	},
+	'LOGIN_ERROR'(state){
+
 	},
 	'LOGOUT'(state){
 		state.status = ''
@@ -27,13 +29,17 @@ const mutations = {
 	},
 	'EDIT_POST'(state, resp) {
 		state.editPost = resp.data;
+	},
+	'GET_POSTS'(state, resp) {
+		state.totalItems = resp.data.totalItems
+		state.posts = resp.data
 	}
 };
 
 const actions = {
 	login({commit}, user){
-		return new Promise((resolve, reject) => {
-			axios({url: '/auth/login', data: user, method: 'POST' })
+		console.log(user)
+		axios({url: '/auth/login', data: user, method: 'POST' })
 			.then(resp => {
 				const user = resp.data.user
 				const token = resp.data.token
@@ -41,18 +47,18 @@ const actions = {
 				localStorage.setItem('token', token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 				commit('AUTH_SUCCESS', { token, user })
-				resolve(resp)
 			})
 			.catch(err => {
-				commit('AUTH_ERROR')
+				console.log(err)
+				user.getin = false;
+				console.log(user)
+				commit('LOGIN_ERROR')
 				localStorage.removeItem('token')
-				reject(err)
+				throw user.getin
 			})
-		})
 	},
 	register({commit}, user){
-		return new Promise((resolve, reject) => {
-			axios({url: '/auth/signup', data: user, method: 'POST' })
+		axios({url: '/auth/signup', data: user, method: 'POST' })
 			.then(resp => {
 				const token = resp.data.token
 				const user = resp.data.user
@@ -61,78 +67,69 @@ const actions = {
 				localStorage.setItem('token', token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 				commit('AUTH_SUCCESS', { token, user })
-				resolve(resp)
 			})
 			.catch(err => {
+				console.log(err)
 				commit('AUTH_ERROR', err)
 				localStorage.removeItem('token')
-				reject(err)
+				throw err
 			})
+	},
+	getPosts: ({commit}, {perPage, page}) => {
+		axios({
+			url: `/feed/posts?page=${page}&postsPerPage=${perPage}`, method: 'GET'
 		})
+			.then(resp => {
+				commit('GET_POSTS', resp)
+			})
+			.catch(err => {
+				console.log(err)
+				localStorage.removeItem('token')
+				throw err
+			})
 	},
 	editPost: ({commit}, id) => {
-		console.log(id);
-		return new Promise((resolve, reject) => {
-			axios({url: `/feed/post/${id}`, method: 'GET' })
+		axios({url: `/feed/post/${id}`, method: 'GET' })
 			.then(resp => {
-				console.log(resp.data)
 				commit('EDIT_POST', resp)
-				resolve(resp)
 			})
 			.catch(err => {
 				console.log(err)
 				localStorage.removeItem('token')
-				reject(err)
+				throw err
 			})
-		})
 	},
 	changePost: ({commit}, { formData, id }) => {
-		console.log(id);
-		console.log(formData);
-		return new Promise((resolve, reject) => {
-			axios({url: `/feed/post/${id}`, data: formData, method: 'PUT' })
-			.then(resp => {
-				console.log(resp.data)
-				console.log('change')
-				resolve(resp)
-			})
+		axios({url: `/feed/post/${id}`, data: formData, method: 'PUT' })
+			.then(resp => {} )
 			.catch(err => {
 				console.log(err)
 				localStorage.removeItem('token')
-				reject(err)
+				throw err
 			})
-		})
 	},
 	deletePost: ({commit}, id) => {
-		console.log(id);
-		return new Promise((resolve, reject) => {
-			axios({url: `/feed/post/${id}`, method: 'DELETE' })
-			.then(resp => {
-				console.log(resp.data)
-				console.log('delete')
-				resolve(resp)
-			})
+		axios({url: `/feed/post/${id}`, method: 'DELETE' })
+			.then(resp => {} )
 			.catch(err => {
 				console.log(err)
 				localStorage.removeItem('token')
-				reject(err)
+				throw err
 			})
-		})
 	},
 	logout({commit}){
-		return new Promise((resolve, reject) => {
-			commit('LOGOUT')
-			localStorage.removeItem('token')
-			delete axios.defaults.headers.common['Authorization']
-			resolve()
-		})
+		commit('LOGOUT')
+		localStorage.removeItem('token')
+		delete axios.defaults.headers.common['Authorization']
 	}
 };
 
 const getters = {
 	isLoggedIn: state => !!state.token,
 	authStatus: state => state.status,
-	editPost: state => state.editPost
+	editPost: state => state.editPost,
+	posts: state => state.posts.posts,
+	totalItems: state => state.totalItems
 };
 
 export default {

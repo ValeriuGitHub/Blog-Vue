@@ -12,78 +12,54 @@
 			<article class="card-body">
 				<form @submit.prevent="register">
 					<div class="form-row">
-						<div class="col form-group">
-							<label>First name </label>
+						<div class="col form-group input" :class="{invalid: $v.name.$error}">
+							<label>User name </label>
 								<input
 									type="text"
-									required
-									autofocus
 									class="form-control"
-									placeholder=""
+									@blur = "$v.name.$touch()"
 									v-model="name">
-						</div>
-						<div class="col form-group">
-							<label>Last name</label>
-								<input type="text" class="form-control" placeholder=" ">
+								<p class="forInvalidInputs" v-if="!$v.name.minLength">
+								User name shoud have at least {{ $v.name.$params.minLength.min }} character.</p>
+								<p class="forInvalidInputs" v-if="!$v.name.maxLength">
+								User name musn't have more than {{ $v.name.$params.maxLength.max }} character.</p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group input" :class="{invalid: $v.email.$error}">
 						<label>Email address</label>
 						<input
 							type="email"
-							required
 							class="form-control"
-							placeholder=""
+							@blur = "$v.email.$touch()"
 							v-model="email">
-						<small class="form-text text-muted">We'll never share your email with anyone else.</small>
+						<p class="forInvalidInputs" v-if="!$v.email.email">Please provide a valid email address.</p>
 					</div>
-					<div class="form-group gender-group">
-						<label class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" value="option1">
-							<span class="form-check-label"> Male </span>
-						</label>
-						<label class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" value="option2">
-							<span class="form-check-label"> Female </span>
-						</label>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label>City</label>
-							<input type="text" class="form-control">
-						</div>
-						<div class="form-group col-md-6">
-							<label>Country</label>
-							<select id="inputState" class="form-control">
-								<option> Choose...</option>
-									<option>Uzbekistan</option>
-									<option>Russia</option>
-									<option selected="">United States</option>
-									<option>India</option>
-									<option>Afganistan</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
+					<div class="form-group input" :class="{invalid: $v.password.$error}">
 						<label for="password">Create Password</label>
 							<input
 								type="password"
 								id="password"
-								required
 								class="form-control"
+								@blur = "$v.password.$touch()"
 								v-model="password">
+							<p class="forInvalidInputs" v-if="!$v.password.minLength">
+							Password shoud have at least {{ $v.password.$params.minLength.min }} character.</p>
+							<p class="forInvalidInputs" v-if="!$v.password.maxLength">
+							Password can't have more than {{ $v.password.$params.maxLength.max }} character.</p>
 					</div>
-					<div class="form-group">
+					<div class="form-group input" :class="{invalid: $v.confirmPassword.$error}">
 						<label for="password-confirm">Confirm Password</label>
 							<input
 								type="password"
 								id="password-confirm"
-								required
 								class="form-control"
-								v-model="password_confirmation">
+								@blur = "$v.confirmPassword.$touch()"
+								v-model="confirmPassword">
+						<p class="forInvalidInputs" v-if="!$v.confirmPassword.sameAs">
+						Confirm password must match a password</p>
 					</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary btn-block">
+							<button type="submit" :disabled="$v.$invalid" class="btn btn-primary btn-block">
 								Register
 							</button>
 						</div>
@@ -100,13 +76,34 @@
 </template>
 
 <script>
+	import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+
 	export default {
 		data(){
 			return {
 				name : "",
 				email : "",
 				password : "",
-				password_confirmation : ""
+				confirmPassword : ""
+			}
+		},
+		validations: {
+			email: {
+				required,
+				email
+			},
+			name: {
+				required,
+				minLength: minLength(6),
+				maxLength: maxLength(15)
+			},
+			password: {
+				required,
+				minLength: minLength(8),
+				maxLength: maxLength(16)
+			},
+			confirmPassword: {
+				sameAs: sameAs('password')
 			}
 		},
 		methods: {
@@ -126,6 +123,23 @@
 </script>
 
 <style lang="scss" scoped>
+
+.input.invalid label {
+	color: red;
+}
+
+.input {
+	width: 300px;
+}
+
+.forInvalidInputs {
+	margin: 10px;
+}
+
+.input.invalid input {
+	border: 1px solid red;
+	background-color: #ffc9aa;
+}
 
 .card-header {
 	display: flex;

@@ -2,7 +2,7 @@
 	<div class="pagination">
 		<div class="pagination__left">
 			<a href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)">
-				Предыдущая
+				Prev
 			</a>
 		</div>
 		<div class="pagination__mid">
@@ -25,7 +25,7 @@
 		</div>
 		<div class="pagination__right">
 			<a href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)">
-				Следующая
+				Next
 			</a>
 		</div>
 	</div>
@@ -95,7 +95,6 @@
 				return this.current < this.totalPages
 			},
 			changePage: function(page) {
-				console.log("page =", page)
 				this.$emit('page-changed', page)
 			}
 		}
@@ -147,9 +146,6 @@
 		& a {
 			float: right;
 		}
-	}
-	&__left, &__right {
-		width: 20%;
 	}
 	&__mid {
 		display: flex;

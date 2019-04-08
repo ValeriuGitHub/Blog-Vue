@@ -5,7 +5,7 @@
 			:current="currentPage"
 			:total="totalItems"
 			:per-page="perPage"
-			@page-changed="getResults"
+			@page-changed="getPosts"
 		></app-pagination>
 	</div>
 </template>
@@ -13,7 +13,6 @@
 <script>
 	import Post from './Post.vue';
 	import Pagination from './Pagination.vue';
-	import axios from 'axios';
 
 	export default {
 		components: {
@@ -23,31 +22,27 @@
 		computed: {
 			posts() {
 				return this.$store.getters.posts;
+			},
+			totalItems() {
+				return this.$store.getters.totalItems;
 			}
 		},
 		data() {
 			return {
 				currentPage: 1,
 				pages: [],
-				totalItems: 0,
 				perPage: 5
 			}
 		},
 		mounted() {
-			this.getResults();
+			this.getPosts();
 		},
 		methods: {
-			getResults(page = 1) {
-				console.log(page)
-				axios({
-					url: `/feed/posts?page=${page}&postsPerPage=${this.perPage}`, method: 'GET'
-				})
-					.then(response => {
-						console.log(response)
-						this.currentPage = page
-						this.totalItems = response.data.totalItems
-						this.$store.state.posts = response.data
-					});
+			getPosts(page = 1) {
+				let perPage = this.perPage;
+				this.$store.dispatch('getPosts', {perPage, page})
+				.then(() => { this.currentPage = page })
+				.catch(err => console.log(err))
 			}
 		}
 	}
