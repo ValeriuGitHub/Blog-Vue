@@ -6,14 +6,15 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<router-link to="/login" activeClass="active" tag="li"><a>Sign in</a></router-link>
-					<router-link to="/register" activeClass="active" tag="li"><a>Sign up</a></router-link>
+					<router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedIn"><a>Sign in</a></router-link>
+					<router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedIn"><a>Sign up</a></router-link>
 					<router-link to="/add-post" activeClass="active" tag="li"><a>Add Post</a></router-link>
 					<router-link to="/posts" activeClass="active" tag="li"><a>Posts</a></router-link>
 				</ul>
 			</div>
 			<div class="logout-wrapper">
 				<div v-if="isLoggedIn" class="logout" activeClass="active">
+					<div v-if="email"></div>
 					<a @click="logout" class="logout-link">Logout</a>
 				</div>
 			</div>
@@ -25,7 +26,10 @@
 
 	export default {
 		computed : {
-			isLoggedIn: function(){ return this.$store.getters.isLoggedIn }
+			isLoggedIn: function(){ return this.$store.getters.isLoggedIn },
+			email () {
+				return !this.$store.getters.user ? false : this.$store.getters.user.email
+			}
 		},
 		methods: {
 			logout: function () {

@@ -74,12 +74,14 @@
 		},
 		methods: {
 			login: function () {
-				let email = this.email;
-				let password = this.password;
-				let getin = this.getin
-				this.$store.dispatch('login', { email, password, getin })
-			 .then(() => this.$router.push('/posts'))
-			 .catch(err => console.log(err))
+				let data = {
+					email: this.email,
+					password: this.password,
+					getin: this.getin
+				}
+				this.$store.dispatch('login', data)
+			  .then(() => this.$router.push('/posts'))
+			  .catch(err => console.log(err))
 			}
 		}
 	}
