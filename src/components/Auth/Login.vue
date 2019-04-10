@@ -44,8 +44,8 @@
 				<div class="links">
 					Don't have an account?<router-link to="/register" activeClass="active" class="signup-link" tag="a">Sign up</router-link>
 				</div>
-				<p> for wrong login</p>
 			</div>
+			<p v-if="status" class="wrongLogin"> {{ status }}</p>
 		</div>
 	</div>
 </template>
@@ -59,6 +59,12 @@
 				email : "",
 				password : "",
 				getin: null
+			}
+		},
+		computed: {
+			isLoggedIn: function(){ return this.$store.getters.isLoggedIn },
+			status() {
+				return this.$store.getters.authStatus
 			}
 		},
 		validations: {
@@ -95,6 +101,16 @@
 .input.invalid input {
 	border: 1px solid red;
 	background-color: #ffc9aa;
+}
+
+.wrongLogin {
+	color: red;
+  margin: 10px 0px 0px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid darkorange;
 }
 
 .input.invalid label {

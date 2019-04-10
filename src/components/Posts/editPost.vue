@@ -10,18 +10,24 @@
 				</form>
 			</div>
 			<div class="card-body">
-				<form>
+				<form @submit.prevent="changePost">
 					<input
 						type="text" name="title" id="title" autocomplete="off"
 						:placeholder="editPost.title"
+						:class="{invalid: $v.title.$error}"
+						@blur = "$v.title.$touch()"
 						class="edit-title input-title input-title_big"
 						v-model="title">
+					<p v-if="$v.title.$error" class="wrongAddPost">Title can't be empty</p>
 					<textarea
 						name="message" id="message" class="edit-content post-message  post-message_big"
 						cols="30" rows="10"
+						:class="{invalid: $v.content.$error}"
+						@blur = "$v.content.$touch()"
 						:placeholder="editPost.content"
 						v-model="content">
 					</textarea>
+					<p v-if="$v.content.$error" class="wrongAddPostTextarea">Message can't be empty</p>
 					<div class="form-group file-submit">
 						<div class="file-group">
 							<input
@@ -37,13 +43,12 @@
 							</svg>
 							<span>Choose another file…</span></label>
 						</div>
-						<form @submit.prevent="changePost">
-							<button
-								type="submit"
-								class="btn float-right login_btn login_btn_big">
-								Change Post
-							</button>
-						</form>
+						<button
+							type="submit"
+							:disabled="disabled || $v.$invalid"
+							class="btn float-right login_btn login_btn_big">
+							Change Post
+						</button>
 					</div>
 				</form>
 			</div>
@@ -57,12 +62,23 @@
 </template>
 
 <script>
+	import { required } from 'vuelidate/lib/validators'
+
 	export default {
 		data() {
 			return {
 				title: '',
 				content: '',
+				disabled: true,
 				files: []
+			}
+		},
+		validations: {
+			content: {
+				required
+			},
+			title: {
+				required
 			}
 		},
 		computed: {
@@ -73,6 +89,7 @@
 		methods: {
 			previewFiles() {
 				this.files = this.$refs.myFiles.files;
+				this.disabled = !this.disabled;
 			},
 			changePost() {
 				this.previewFiles()
@@ -98,6 +115,21 @@
 
 <style lang="scss">
 @import '../.././scss/variables.scss';
+
+.invalid {
+	border: 1px solid red;
+	background-color: #ffc9aa;
+}
+
+.wrongAddPost {
+	margin: 5px;
+	font-size: 15px;
+}
+
+.wrongAddPostArea {
+	margin: 0px 0px 0px 0px;
+	font-size: 15px;
+}
 
 .edit {
 	&-card {

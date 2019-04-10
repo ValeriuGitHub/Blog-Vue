@@ -12,7 +12,7 @@
 			<article class="card-body">
 				<form @submit.prevent="register">
 					<div class="form-row">
-						<div class="col form-group input" :class="{invalid: $v.name.$error}">
+						<div class="col form-group input" :class="{'reg-invalid': $v.name.$error}">
 							<label>User name </label>
 								<input
 									type="text"
@@ -25,7 +25,7 @@
 								User name musn't have more than {{ $v.name.$params.maxLength.max }} character.</p>
 						</div>
 					</div>
-					<div class="form-group input" :class="{invalid: $v.email.$error}">
+					<div class="form-group input" :class="{'reg-invalid': $v.email.$error}">
 						<label>Email address</label>
 						<input
 							type="email"
@@ -34,7 +34,7 @@
 							v-model="email">
 						<p class="forInvalidInputs" v-if="!$v.email.email">Please provide a valid email address.</p>
 					</div>
-					<div class="form-group input" :class="{invalid: $v.password.$error}">
+					<div class="form-group input" :class="{'reg-invalid': $v.password.$error}">
 						<label for="password">Create Password</label>
 							<input
 								type="password"
@@ -47,7 +47,7 @@
 							<p class="forInvalidInputs" v-if="!$v.password.maxLength">
 							Password can't have more than {{ $v.password.$params.maxLength.max }} character.</p>
 					</div>
-					<div class="form-group input" :class="{invalid: $v.confirmPassword.$error}">
+					<div class="form-group input" :class="{'reg-invalid': $v.confirmPassword.$error}">
 						<label for="password-confirm">Confirm Password</label>
 							<input
 								type="password"
@@ -124,7 +124,7 @@
 
 <style lang="scss" scoped>
 
-.input.invalid label {
+.reg-invalid label {
 	color: red;
 }
 
@@ -136,7 +136,7 @@
 	margin: 10px;
 }
 
-.input.invalid input {
+.reg-invalid input {
 	border: 1px solid red;
 	background-color: #ffc9aa;
 }

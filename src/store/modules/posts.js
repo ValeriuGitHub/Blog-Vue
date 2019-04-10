@@ -8,7 +8,7 @@ const state = {
 
 const mutations = {
 	'POST_MESSAGE'(state, resp) {
-		Object.assign(state.posts, resp.data);
+
 	},
 	'EDIT_POST'(state, resp) {
 		state.editPost = resp.data;
@@ -16,6 +16,13 @@ const mutations = {
 	'GET_POSTS'(state, resp) {
 		state.totalItems = resp.data.totalItems
 		state.posts = resp.data
+	},
+	'DELETE_POST'(state, id) {
+    // const index = state.editPost.findIndex(task => task._id === id);
+    // if (index !== -1) state.editPost.splice(index, 1);
+	},
+	'CHANGE_POST'(state, id) {
+
 	}
 };
 
@@ -27,7 +34,6 @@ const actions = {
 			})
 			.catch(err => {
 				console.log(err)
-				localStorage.removeItem('token')
 				throw err
 			})
 	},
@@ -38,7 +44,6 @@ const actions = {
 			})
 			.catch(err => {
 				console.log(err)
-				localStorage.removeItem('token')
 				throw err
 			})
 	},
@@ -51,25 +56,26 @@ const actions = {
 			})
 			.catch(err => {
 				console.log(err)
-				localStorage.removeItem('token')
 				throw err
 			})
 	},
 	changePost: ({commit}, { formData, id }) => {
 		axios({url: `/feed/post/${id}`, data: formData, method: 'PUT' })
-			.then(resp => {} )
+			.then(resp => {
+				commit('CHANGE_POST', id)
+			})
 			.catch(err => {
 				console.log(err)
-				localStorage.removeItem('token')
 				throw err
 			})
 	},
 	deletePost: ({commit}, id) => {
 		axios({url: `/feed/post/${id}`, method: 'DELETE' })
-			.then(resp => {} )
+			.then(resp => {
+				commit('DELETE_POST', id)
+			})
 			.catch(err => {
 				console.log(err)
-				localStorage.removeItem('token')
 				throw err
 			})
 	}

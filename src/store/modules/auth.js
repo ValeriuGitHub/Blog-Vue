@@ -11,15 +11,13 @@ const state = {
 
 const mutations = {
 	'AUTH_USER' (state, userData) {
+		state.status = ''
 		state.token = userData.token
 		state.userId = userData.userId
 		state.user = userData.user
 	},
 	'AUTH_ERROR'(state){
-		state.status = 'error'
-	},
-	'LOGIN_ERROR'(state){
-
+		state.status = "This account is not registered (wrong email or password)."
 	},
 	'LOGOUT'(state){
 		state.status = ''
@@ -53,12 +51,7 @@ const actions = {
 				dispatch('setLogoutTimer', 3600)
 			})
 			.catch(err => {
-				console.log(err)
-				user.getin = false;
-				console.log(user)
-				commit('LOGIN_ERROR')
-				localStorage.removeItem('token')
-				throw user.getin
+				commit('AUTH_ERROR')
 			})
 	},
 	register({commit, dispatch}, user){
