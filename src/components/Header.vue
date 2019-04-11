@@ -14,7 +14,7 @@
 			</div>
 			<div class="logout-wrapper">
 				<div v-if="isLoggedIn" class="logout" activeClass="active">
-					<div v-if="email"></div>
+					<div v-if="user" class="logout-user"> {{ user }}</div>
 					<a @click="logout" class="logout-link">Logout</a>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 	export default {
 		computed : {
 			isLoggedIn: function(){ return this.$store.getters.isLoggedIn },
-			email () {
+			user () {
 				return !this.$store.getters.user ? false : this.$store.getters.user.email
 			}
 		},
@@ -48,6 +48,11 @@
 @import '.././scss/variables.scss';
 
 .logout {
+  display: flex;
+  align-items: center;
+  &-user {
+  	margin-right: 10px;
+  }
 	&-wrapper {
 		margin-left: auto;
 	}
@@ -58,9 +63,12 @@
 		cursor: pointer;
 		line-height: 20px;
 		color: #fff;
+		background-color: brown;
 		font-size: 16px;
 		&:hover {
-			opacity: 0.7;
+			opacity: 1;
+			color: brown;
+			background-color: #fff;
 			text-decoration: none;
 		}
 	}

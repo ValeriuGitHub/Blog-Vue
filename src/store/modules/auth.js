@@ -10,7 +10,10 @@ const state = {
 };
 
 const mutations = {
-	'AUTH_USER' (state, userData) {
+	'AUTH_REQUEST'(state) {
+		state.status = 'loading...'
+	},
+	'AUTH_SUCCESS'(state, userData) {
 		state.status = ''
 		state.token = userData.token
 		state.userId = userData.userId
@@ -31,36 +34,42 @@ const actions = {
 			commit('LOGOUT')
 		}, expirationTime * 1000)
 	},
-	login({commit, dispatch}, user){
-		axios({url: '/auth/login', data: user, method: 'POST' })
-			.then(resp => {
-				const user = resp.data.user
-				const token = resp.data.token
-				const userId = resp.data.userId
-				commit('AUTH_USER', {
-					token: token,
-					user: user,
-					userId: userId
+	loginRequest({commit, dispatch}, user){
+		return new Promise((resolve, reject) => {
+			commit('AUTH_REQUEST')
+			axios({url: '/auth/login', data: user, method: 'POST' })
+				.then(resp => {
+					const token = resp.data.token
+					const userId = resp.data.userId
+					commit('AUTH_SUCCESS', {
+						token: token,
+						user: user,
+						userId: userId
+					})
+					localStorage.setItem('token', token)
+					axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+					const now = new Date()
+					const expirationDate = new Date(now.getTime() + 3600 * 1000)
+					localStorage.setItem('expirationDate', expirationDate)
+					localStorage.setItem('user', JSON.stringify(user))
+					localStorage.setItem('userId', userId)
+					console.log(user.email)
+					dispatch('setLogoutTimer', 3600)
+					resolve(resp)
 				})
-				localStorage.setItem('token', token)
-				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-				const now = new Date()
-				const expirationDate = new Date(now.getTime() + 3600 * 1000)
-				localStorage.setItem('expirationDate', expirationDate)
-				localStorage.setItem('userId', userId)
-				dispatch('setLogoutTimer', 3600)
-			})
-			.catch(err => {
-				commit('AUTH_ERROR')
+				.catch(err => {
+					commit('AUTH_ERROR')
+					localStorage.removeItem('token')
+					reject(err)
+				})
 			})
 	},
 	register({commit, dispatch}, user){
 		axios({url: '/auth/signup', data: user, method: 'POST' })
 			.then(resp => {
 				const token = resp.data.token
-				const user = resp.data.user
 				const userId = resp.data.userId
-				commit('AUTH_USER', {
+				commit('AUTH_SUCCESS', {
 					token: token,
 					user: user,
 					userId: userId
@@ -70,12 +79,12 @@ const actions = {
 				const now = new Date()
 				const expirationDate = new Date(now.getTime() + 3600 * 1000)
 				localStorage.setItem('expirationDate', expirationDate)
+				localStorage.setItem('user', JSON.stringify(user))
 				localStorage.setItem('userId', userId)
 				dispatch('setLogoutTimer', 3600)
 			})
 			.catch(err => {
-				console.log(err)
-				commit('AUTH_ERROR', err)
+				commit('AUTH_ERROR')
 				localStorage.removeItem('token')
 				throw err
 			})
@@ -91,10 +100,12 @@ const actions = {
 			return
 		}
 		const userId = localStorage.getItem('userId')
+		const user = JSON.parse(localStorage.getItem('user'))
 		axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-		commit('AUTH_USER', {
+		commit('AUTH_SUCCESS', {
 			token: token,
-			userId: userId
+			userId: userId,
+			user: user
 		})
 	},
 	logout({commit}){

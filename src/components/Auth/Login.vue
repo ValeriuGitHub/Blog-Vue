@@ -85,7 +85,7 @@
 					password: this.password,
 					getin: this.getin
 				}
-				this.$store.dispatch('login', data)
+			  this.$store.dispatch('loginRequest', data)
 			  .then(() => this.$router.push('/posts'))
 			  .catch(err => console.log(err))
 			}

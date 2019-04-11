@@ -8,7 +8,7 @@ const state = {
 
 const mutations = {
 	'POST_MESSAGE'(state, resp) {
-
+		state.posts.posts.push(resp.data.post)
 	},
 	'EDIT_POST'(state, resp) {
 		state.editPost = resp.data;
@@ -18,11 +18,16 @@ const mutations = {
 		state.posts = resp.data
 	},
 	'DELETE_POST'(state, id) {
-    // const index = state.editPost.findIndex(task => task._id === id);
-    // if (index !== -1) state.editPost.splice(index, 1);
+		const index = state.posts.posts.findIndex(task => task._id === id);
+    if (index !== -1) state.posts.posts.splice(index, 1);
 	},
-	'CHANGE_POST'(state, id) {
-
+	'CHANGE_POST'(state, resp) {
+    const index = state.posts.posts.findIndex(task => task._id === resp.data.post._id);
+    if (index === -1) {
+      state.posts.posts.push(resp.data.post);
+    } else {
+      Object.assign(state.posts.posts[index], resp.data.post);
+    }
 	}
 };
 
@@ -62,7 +67,7 @@ const actions = {
 	changePost: ({commit}, { formData, id }) => {
 		axios({url: `/feed/post/${id}`, data: formData, method: 'PUT' })
 			.then(resp => {
-				commit('CHANGE_POST', id)
+				commit('CHANGE_POST', resp)
 			})
 			.catch(err => {
 				console.log(err)
