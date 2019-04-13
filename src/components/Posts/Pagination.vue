@@ -1,31 +1,40 @@
 <template id="pagination-template">
 	<div class="pagination">
 		<div class="pagination__left">
-			<a href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)">
+			<a href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)"
+				class="pagination__link">
 				Prev
 			</a>
 		</div>
 		<div class="pagination__mid">
-			<ul>
-				<li v-if="hasFirst()"><a href="#" @click.prevent="changePage(1)">1</a></li>
+			<ul class="pagination__mid-list">
+				<li v-if="hasFirst()">
+					<a href="#" @click.prevent="changePage(1)"
+						class="pagination__link">
+						1
+					</a>
+				</li>
 				<li v-if="hasFirst()">...</li>
 				<li v-for="page in pages">
 					<a href="#" @click.prevent="changePage(page)"
+						class="pagination__link"
 						:class="{ current: current == page }">
 						{{ page }}
 					</a>
 				</li>
 				<li v-if="hasLast()">...</li>
 				<li v-if="hasLast()">
-					<a href="#" @click.prevent="changePage(totalPages)">
+					<a href="#" @click.prevent="changePage(totalPages)"
+					 class="pagination__link">
 						{{ totalPages }}
 					</a>
 				</li>
 			</ul>
 		</div>
 		<div class="pagination__right">
-			<a href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)">
-				Next
+			<a href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)"
+				class="pagination__link pagination__right-link">
+					Next
 			</a>
 		</div>
 	</div>
@@ -112,8 +121,8 @@
 	justify-content: space-between;
 	margin: 30px auto 30px;
 	padding: 0 15px;
-	max-width: 1280px;
-	& a {
+	max-width: 1170px;
+	&__link {
 		float: right;
 		padding: 0 20px;
 		max-width: 160px;
@@ -123,12 +132,6 @@
 		text-decoration: none;
 		margin: 0 6px;
 		transition: all .2s ease-in-out;
-		&.current {
-			border-color: #fff;
-			color: #fff;
-		}
-	}
-	& a, & span {
 		display: block;
 		text-align: center;
 		font-family: Helvetica, Arial, sans-serif;
@@ -137,13 +140,17 @@
 		height: 44px;
 		color: #000;
 		font-size: 18px;
+		&.current {
+			border-color: #962323;
+			color: #962323;
+		}
 	}
 	&__left {
 		float: left;
 	}
 	&__right {
 		float: right;
-		& a {
+		&-link {
 			float: right;
 		}
 	}
@@ -151,22 +158,22 @@
 		display: flex;
 		justify-content: center;
 		width: 60%;
-		& ul {
+		&-list {
 			list-style: none;
 			padding: 0;
 			margin: 0;
-		}
-		& li {
-			display: inline-block;
+			& li {
+				display: inline-block;
+			}
 		}
 	}
 }
 
 @media (hover) {
  .pagination a:hover {
-		border-color: #fff;
-		color: #fff;
- }
+		border-color: #962323;
+		color: #962323;
+	}
 }
 
 </style>

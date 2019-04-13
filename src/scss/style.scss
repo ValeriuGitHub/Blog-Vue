@@ -1,21 +1,54 @@
 @font-face {
 	font-family: 'Georgia-Bold';
-	src: url('../fonts/Georgia-Bold.eot');
-	src: url('../fonts/Georgia-Bold.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Georgia-Bold.woff2') format('woff2'),
-		url('../fonts/Georgia-Bold.woff') format('woff'),
-		url('../fonts/Georgia-Bold.ttf') format('truetype');
+	src: url('../../fonts/Georgia-Bold.eot');
+	src: url('../../fonts/Georgia-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/Georgia-Bold.woff2') format('woff2'),
+		url('../../fonts/Georgia-Bold.woff') format('woff'),
+		url('../../fonts/Georgia-Bold.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Regular.eot');
-	src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/Roboto-Regular.woff2') format('woff2'),
-		url('../fonts/Roboto-Regular.woff') format('woff'),
-		url('../fonts/Roboto-Regular.ttf') format('truetype');
+	src: url('../../fonts/Roboto-Regular.eot');
+	src: url('../../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/Roboto-Regular.woff2') format('woff2'),
+		url('../../fonts/Roboto-Regular.woff') format('woff'),
+		url('../../fonts/Roboto-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ProximaNova';
+	src: url('../../fonts/ProximaNova-Regular.eot');
+	src: url('../../fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/ProximaNova-Regular.woff2') format('woff2'),
+		url('../../fonts/ProximaNova-Regular.woff') format('woff'),
+		url('../../fonts/ProximaNova-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ProximaNova';
+	src: url('../../fonts/ProximaNova-Thin.eot');
+	src: url('../../fonts/ProximaNova-Thin.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/ProximaNova-Thin.woff2') format('woff2'),
+		url('../../fonts/ProximaNova-Thin.woff') format('woff'),
+		url('../../fonts/ProximaNova-Thin.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ForeverBrushScript';
+	src: url('../../fonts/ForeverBrushScript.eot');
+	src: url('../../fonts/ForeverBrushScript.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/ForeverBrushScript.woff2') format('woff2'),
+		url('../../fonts/ForeverBrushScript.woff') format('woff'),
+		url('../../fonts/ForeverBrushScript.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }

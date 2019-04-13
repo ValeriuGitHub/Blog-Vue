@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<app-post v-for="post in posts" :post="post"></app-post>
+		<div class="container page__wrapper">
+			<app-post v-for="post in posts" :post="post"></app-post>
+		</div>
 		<app-pagination
 			:current="currentPage"
 			:total="totalItems"
@@ -52,11 +54,12 @@
 
 @import '../.././scss/misc.scss';
 @import '../.././scss/variables.scss';
+@import '../.././scss/style.scss';
 
 .page {
 	&__wrapper {
 		padding-bottom: 40px;
-		padding-top: 20px;
+		padding-top: 80px;
 	}
 	&__list	{
 		display: flex;

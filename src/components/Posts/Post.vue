@@ -1,20 +1,18 @@
 <template>
-	<div class="container">
-		<div class="well">
-			<div class="media">
-				<div class="pull-left">
-					<img class="media-object" :src="'http://localhost:8080/' + post.imageUrl">
-				</div>
-				<div class="media-body">
-					<h4 class="media-heading">{{ post.title }}</h4>
-					<p>{{ post.content }}</p>
-					<div class="list-inline list-unstyled">
-						<form @submit.prevent="editPost" class="edit-form">
-							<button class="edit-button" :post="post">
-								Edit
-							</button>
-						</form>
-					</div>
+	<div class="well">
+		<div class="media">
+			<div class="pull-left">
+				<img class="media-object" :src="'http://localhost:8080/' + post.imageUrl">
+			</div>
+			<div class="media-body">
+				<h4 class="media-heading">{{ post.title }}</h4>
+				<p>{{ post.content }}</p>
+				<div class="list-inline list-unstyled">
+					<form @submit.prevent="editPost" class="edit-form">
+						<button class="edit-button" :post="post">
+							Edit
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -43,7 +41,7 @@
 
 .well {
 	background-color: brown;
-	border: 2px solid darkgoldenrod;
+	border: 1.1px solid #fff;
 }
 .edit {
 	&-form {

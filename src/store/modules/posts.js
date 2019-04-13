@@ -19,15 +19,15 @@ const mutations = {
 	},
 	'DELETE_POST'(state, id) {
 		const index = state.posts.posts.findIndex(task => task._id === id);
-    if (index !== -1) state.posts.posts.splice(index, 1);
+		if (index !== -1) state.posts.posts.splice(index, 1);
 	},
 	'CHANGE_POST'(state, resp) {
-    const index = state.posts.posts.findIndex(task => task._id === resp.data.post._id);
-    if (index === -1) {
-      state.posts.posts.push(resp.data.post);
-    } else {
-      Object.assign(state.posts.posts[index], resp.data.post);
-    }
+		const index = state.posts.posts.findIndex(task => task._id === resp.data.post._id);
+		if (index === -1) {
+			state.posts.posts.push(resp.data.post);
+		} else {
+			Object.assign(state.posts.posts[index], resp.data.post);
+		}
 	}
 };
 
@@ -38,7 +38,6 @@ const actions = {
 				commit('POST_MESSAGE', resp)
 			})
 			.catch(err => {
-				console.log(err)
 				throw err
 			})
 	},
@@ -48,7 +47,6 @@ const actions = {
 				commit('EDIT_POST', resp)
 			})
 			.catch(err => {
-				console.log(err)
 				throw err
 			})
 	},
@@ -60,7 +58,6 @@ const actions = {
 				commit('GET_POSTS', resp)
 			})
 			.catch(err => {
-				console.log(err)
 				throw err
 			})
 	},
@@ -70,7 +67,7 @@ const actions = {
 				commit('CHANGE_POST', resp)
 			})
 			.catch(err => {
-				console.log(err)
+				alert("You can't change this!")
 				throw err
 			})
 	},
@@ -80,7 +77,7 @@ const actions = {
 				commit('DELETE_POST', id)
 			})
 			.catch(err => {
-				console.log(err)
+				alert("You can't delete this!")
 				throw err
 			})
 	}

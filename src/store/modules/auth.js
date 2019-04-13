@@ -53,7 +53,6 @@ const actions = {
 					localStorage.setItem('expirationDate', expirationDate)
 					localStorage.setItem('user', JSON.stringify(user))
 					localStorage.setItem('userId', userId)
-					console.log(user.email)
 					dispatch('setLogoutTimer', 3600)
 					resolve(resp)
 				})
@@ -113,6 +112,7 @@ const actions = {
 		localStorage.removeItem('token')
 		localStorage.removeItem('expirationDate')
 		localStorage.removeItem('userId')
+		localStorage.removeItem('user')
 		delete axios.defaults.headers.common['Authorization']
 	}
 };

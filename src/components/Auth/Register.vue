@@ -3,11 +3,13 @@
 		<div class="card">
 			<header class="card-header">
 				<h4 class="card-title mt-2">Sign up</h4>
-				<button class="signup-btn">
-					<router-link to="/login" class="sign-link" activeClass="active" tag="a">
-						Log in
-					</router-link>
-				</button>
+				<router-link to="/login" tag="div">
+					<a class="sign-link sign-link_white">
+						<button class="signup-btn">
+							Log in
+						</button>
+					</a>
+				</router-link>
 			</header>
 			<article class="card-body">
 				<form @submit.prevent="register">
@@ -19,9 +21,9 @@
 									class="form-control"
 									@blur = "$v.name.$touch()"
 									v-model="name">
-								<p class="forInvalidInputs" v-if="!$v.name.minLength">
+								<p class="register-wrong" v-if="!$v.name.minLength">
 								User name shoud have at least {{ $v.name.$params.minLength.min }} character.</p>
-								<p class="forInvalidInputs" v-if="!$v.name.maxLength">
+								<p class="register-wrong" v-if="!$v.name.maxLength">
 								User name musn't have more than {{ $v.name.$params.maxLength.max }} character.</p>
 						</div>
 					</div>
@@ -32,7 +34,7 @@
 							class="form-control"
 							@blur = "$v.email.$touch()"
 							v-model="email">
-						<p class="forInvalidInputs" v-if="!$v.email.email">Please provide a valid email address.</p>
+						<p class="register-wrong" v-if="!$v.email.email">Please provide a valid email address.</p>
 					</div>
 					<div class="form-group input" :class="{'reg-invalid': $v.password.$error}">
 						<label for="password">Create Password</label>
@@ -42,9 +44,9 @@
 								class="form-control"
 								@blur = "$v.password.$touch()"
 								v-model="password">
-							<p class="forInvalidInputs" v-if="!$v.password.minLength">
+							<p class="register-wrong" v-if="!$v.password.minLength">
 							Password shoud have at least {{ $v.password.$params.minLength.min }} character.</p>
-							<p class="forInvalidInputs" v-if="!$v.password.maxLength">
+							<p class="register-wrong" v-if="!$v.password.maxLength">
 							Password can't have more than {{ $v.password.$params.maxLength.max }} character.</p>
 					</div>
 					<div class="form-group input" :class="{'reg-invalid': $v.confirmPassword.$error}">
@@ -55,7 +57,7 @@
 								class="form-control"
 								@blur = "$v.confirmPassword.$touch()"
 								v-model="confirmPassword">
-						<p class="forInvalidInputs" v-if="!$v.confirmPassword.sameAs">
+						<p class="register-wrong" v-if="!$v.confirmPassword.sameAs">
 						Confirm password must match a password</p>
 					</div>
 						<div class="form-group">
@@ -124,23 +126,20 @@
 
 <style lang="scss" scoped>
 
-.reg-invalid label {
-	color: red;
-}
+@import '../.././scss/variables.scss';
 
 .input {
 	width: 300px;
 }
-
-.forInvalidInputs {
-	margin: 10px;
+.register {
+	&-wrong {
+		margin: 7px 0px -10px 0px;
+	}
 }
-
 .reg-invalid input {
 	border: 1px solid red;
 	background-color: #ffc9aa;
 }
-
 .card-header {
 	display: flex;
 	justify-content: space-between;
@@ -170,22 +169,27 @@ input[type=radio] {
 }
 .signup {
 	&-link {
+		color: $orange;
 		text-decoration: none;
 		&:hover, &:focus {
 			text-decoration: none;
-			color: blue;
+			color: #f6d9d9;
 		}
 	}
 	&-btn {
 		background-color: transparent;
-		border: 1px solid blue;
+		border: 1px solid #fff;
 		padding: 10px 15px;
 		margin: 0;
+		text-decoration: none;
 		&:hover {
+			color: blue;
+			text-decoration: none;
 			background-color: #fff;
 		}
 		&:hover .sign-link {
 			color: blue;
+			text-decoration: none;
 			font-weight: bold;
 		}
 	}

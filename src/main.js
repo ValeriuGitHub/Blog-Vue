@@ -10,6 +10,7 @@ import router from './routes';
 import store from './store/store';
 import apiConfig from './configs/api.config';
 
+Vue.prototype.$http = axios
 const token = localStorage.getItem('token')
 if (token) {
 	Vue.prototype.$http.defaults.headers.common['Authorization'] = token

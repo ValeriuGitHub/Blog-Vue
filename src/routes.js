@@ -4,7 +4,10 @@ import store from './store/store';
 
 import Login from './components/Auth/Login.vue';
 import Register from './components/Auth/Register.vue';
-import Home from './components/Home.vue';
+import Home from './components/Home/Home.vue';
+import Story from './components/OurStory/OurStory.vue';
+import Recipes from './components/Recipes/Recipes.vue';
+import Menu from './components/Menu/Menu.vue';
 import Posts from './components/Posts/Posts.vue';
 import Post from './components/Posts/Post.vue';
 import editPost from './components/Posts/editPost.vue';
@@ -19,6 +22,30 @@ let router = new Router({
 			path: '/',
 			name: 'home',
 			component: Home
+		},
+		{
+			path: '/our-story',
+			name: 'ourStory',
+			component: Story,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/recipes',
+			name: 'recipes',
+			component: Recipes,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			path: '/menu',
+			name: 'menu',
+			component: Menu,
+			meta: {
+				requiresAuth: true
+			}
 		},
 		{
 			path: '/login',
