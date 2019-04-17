@@ -13,19 +13,8 @@
 	import Header from './components/Header/Header.vue';
 	export default {
 		created: function () {
-			this.$router.push('/posts')
-			this.$http.interceptors.response.use(undefined, function (err) {
-				return new Promise(function (resolve, reject) {
-					if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-						this.$store.dispatch('logout')
-						this.$router.push('/login')
-					}
-					throw err;
-				});
-			});
-		},
-		created() {
 			this.$store.dispatch('tryAutoLogin')
+			this.$router.push('/posts')
 		},
 		components: {
 			appHeader: Header
@@ -41,6 +30,21 @@
   height: calc(100vh - 50px);
 	display: flex;
 	align-items: center;
+}
+.error {
+	&-info {
+		display: flex;
+		justify-content: center;
+		font-size: 22px;
+		padding: 15px 20px;
+		border-radius: 5px;
+		background-color: #fff;
+		border: 1.5px solid red;
+		color: $orange;
+		width: 300px;
+		margin: 0 auto;
+		text-align: center;
+	}
 }
 .title {
 	font-size: 56px;

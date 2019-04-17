@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from '../../routes';
 
 const token = localStorage.getItem('token');
 
@@ -58,7 +59,9 @@ const actions = {
 				})
 				.catch(err => {
 					commit('AUTH_ERROR')
-					localStorage.removeItem('token')
+					if (err.response.status === 401) {
+						localStorage.removeItem('token')
+					}
 					reject(err)
 				})
 			})
@@ -84,7 +87,9 @@ const actions = {
 			})
 			.catch(err => {
 				commit('AUTH_ERROR')
-				localStorage.removeItem('token')
+				if (err.response.status === 401) {
+					localStorage.removeItem('token')
+				}
 				throw err
 			})
 	},

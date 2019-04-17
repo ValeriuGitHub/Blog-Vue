@@ -3,6 +3,11 @@
 		<div class="container page__wrapper">
 			<app-post v-for="post in posts" :post="post"></app-post>
 		</div>
+		<div v-if="info" class="container error-wrapper">
+		  <div class="error-info">
+		  	{{ info }}
+		  </div>
+		</div>
 		<app-pagination
 			:current="currentPage"
 			:total="totalItems"
@@ -24,6 +29,9 @@
 		computed: {
 			posts() {
 				return this.$store.getters.posts;
+			},
+			info() {
+				return this.$store.getters.info;
 			},
 			totalItems() {
 				return this.$store.getters.totalItems;
