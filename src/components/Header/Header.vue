@@ -1,30 +1,29 @@
-<template>
-	<header class="header">
-		<nav class="navbar navbar-default">
-			<div class="container centered">
-				<div class="navbar-header">
-					<router-link to="/" class="navbar-brand">Restaurant</router-link>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<router-link to="/login" activeClass="active" tag="li" v-if="!isLoggedIn"><a class="navbar-nav__link">Sign in</a></router-link>
-						<router-link to="/register" activeClass="active" tag="li" v-if="!isLoggedIn"><a class="navbar-nav__link">Sign up</a></router-link>
-						<router-link to="/our-story" activeClass="active" tag="li"><a class="navbar-nav__link">Our Story</a></router-link>
-						<router-link to="/recipes" activeClass="active" tag="li"><a class="navbar-nav__link">Recipes</a></router-link>
-						<router-link to="/menu" activeClass="active" tag="li"><a class="navbar-nav__link">Menu</a></router-link>
-						<router-link to="/add-post" activeClass="active" tag="li"><a class="navbar-nav__link">Add Post</a></router-link>
-						<router-link to="/posts" activeClass="active" tag="li"><a class="navbar-nav__link">Posts</a></router-link>
-					</ul>
-				</div>
-				<div class="logout-wrapper">
-					<div v-if="isLoggedIn" class="logout" activeClass="active">
-						<div v-if="user" class="logout__user"> {{ user }}</div>
-						<a @click="logout" class="logout__link">Logout</a>
-					</div>
-				</div>
-			</div>
-		</nav>
-	</header>
+<template lang="pug">
+	header.header
+		nav.navbar.navbar-default
+			div.container.centered
+				div.navbar-header
+					router-link(to="/").navbar-brand Restaurant
+				div.collapse.navbar-collapse
+					ul.nav.navbar-nav
+						router-link(to="/login" activeClass="active" tag="li" v-if="!isLoggedIn")
+							a.navbar-nav__link Sign in
+						router-link(to="/register" activeClass="active" tag="li" v-if="!isLoggedIn")
+							a.navbar-nav__link Sign up
+						router-link(to="/our-story" activeClass="active" tag="li")
+							a.navbar-nav__link Our Story
+						router-link(to="/recipes" activeClass="active" tag="li")
+							a.navbar-nav__link Recipes
+						router-link(to="/menu" activeClass="active" tag="li")
+							a.navbar-nav__link Menu
+						router-link(to="/add-post" activeClass="active" tag="li")
+							a.navbar-nav__link Add Post
+						router-link(to="/posts" activeClass="active" tag="li")
+							a.navbar-nav__link Posts
+				div.logout-wrapper
+					div(v-if="isLoggedIn" activeClass="active").logout
+						div(v-if="user").logout__user {{ user }}
+						a(@click="logout").logout__link Logout
 </template>
 
 <script>

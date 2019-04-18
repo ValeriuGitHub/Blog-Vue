@@ -1,14 +1,9 @@
-<template>
-	<div class="recipes-bg">
-		<div class="container">
-			<div class="recipes">
-				<h1 class="title recipes__title">Signatures Recipes</h1>
-				<p class="text recipes__text">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-				</p>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.recipes-bg
+		div.container
+			div.recipes
+				h1.title.recipes__title Signatures Recipes
+				p.text.recipes__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 </template>
 
 <style lang="scss">

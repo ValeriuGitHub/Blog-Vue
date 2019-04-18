@@ -1,80 +1,60 @@
-<template>
-	<div class="container container-centred">
-		<div class="card">
-			<header class="card-header">
-				<h4 class="card-title mt-2">Sign up</h4>
-				<router-link to="/login" tag="div">
-					<a class="sign-link sign-link_white">
-						<button class="signup-btn">
-							Log in
-						</button>
-					</a>
-				</router-link>
-			</header>
-			<article class="card-body">
-				<form @submit.prevent="register">
-					<div class="form-row">
-						<div class="col form-group input" :class="{'reg-invalid': $v.name.$error}">
-							<label>User name </label>
-								<input
-									type="text"
-									class="form-control"
-									@blur = "$v.name.$touch()"
-									v-model="name">
-								<p class="register-wrong" v-if="!$v.name.minLength">
-								User name shoud have at least {{ $v.name.$params.minLength.min }} character.</p>
-								<p class="register-wrong" v-if="!$v.name.maxLength">
-								User name musn't have more than {{ $v.name.$params.maxLength.max }} character.</p>
-						</div>
-					</div>
-					<div class="form-group input" :class="{'reg-invalid': $v.email.$error}">
-						<label>Email address</label>
-						<input
+<template lang="pug">
+	div.container.container-centred
+		div.card
+			header.card-header
+				h4.card-title.mt-2 Sign up
+				router-link(to="/login" tag="div")
+					a.sign-link.sign-link_white
+						button.signup-btn Log in
+			article.card-body
+				form(@submit.prevent="register")
+					div.form-row
+						div(:class="{'reg-invalid': $v.name.$error}").col.form-group.input
+							label User name
+							input(
+								type="text"
+								class="form-control"
+								@blur = "$v.name.$touch()"
+								v-model="name")
+							p(v-if="!$v.name.minLength").register-wrong
+								| User name shoud have at least {{ $v.name.$params.minLength.min }} character.
+							p(v-if="!$v.name.maxLength").register-wrong
+								| User name musn't have more than {{ $v.name.$params.maxLength.max }} character.
+					div(:class="{'reg-invalid': $v.email.$error}").form-group.input
+						label Email address
+						input(
 							type="email"
 							class="form-control"
 							@blur = "$v.email.$touch()"
-							v-model="email">
-						<p class="register-wrong" v-if="!$v.email.email">Please provide a valid email address.</p>
-					</div>
-					<div class="form-group input" :class="{'reg-invalid': $v.password.$error}">
-						<label for="password">Create Password</label>
-							<input
-								type="password"
-								id="password"
-								class="form-control"
-								@blur = "$v.password.$touch()"
-								v-model="password">
-							<p class="register-wrong" v-if="!$v.password.minLength">
-							Password shoud have at least {{ $v.password.$params.minLength.min }} character.</p>
-							<p class="register-wrong" v-if="!$v.password.maxLength">
-							Password can't have more than {{ $v.password.$params.maxLength.max }} character.</p>
-					</div>
-					<div class="form-group input" :class="{'reg-invalid': $v.confirmPassword.$error}">
-						<label for="password-confirm">Confirm Password</label>
-							<input
-								type="password"
-								id="password-confirm"
-								class="form-control"
-								@blur = "$v.confirmPassword.$touch()"
-								v-model="confirmPassword">
-						<p class="register-wrong" v-if="!$v.confirmPassword.sameAs">
-						Confirm password must match a password</p>
-					</div>
-						<div class="form-group">
-							<button type="submit" :disabled="$v.$invalid" class="btn btn-primary btn-block">
-								Register
-							</button>
-						</div>
-				</form>
-			</article>
-			<div class="border-top card-body text-center">
-				<span class="link-margin">Have an account?</span>
-				<router-link to="/login" class="signup-link" activeClass="active" tag="a">
-					Log in
-				</router-link>
-			</div>
-		</div>
-	</div>
+							v-model="email")
+						p(v-if="!$v.email.email").register-wrong Please provide a valid email address.
+					div(:class="{'reg-invalid': $v.password.$error}").form-group.input
+						label(for="password") Create Password
+						input(
+							type="password"
+							id="password"
+							class="form-control"
+							@blur="$v.password.$touch()"
+							v-model="password")
+						p(v-if="!$v.password.minLength").register-wrong
+							| Password shoud have at least {{ $v.password.$params.minLength.min }} character.
+						p(v-if="!$v.password.maxLength").register-wrong
+							| Password can't have more than {{ $v.password.$params.maxLength.max }} character.
+					div(:class="{'reg-invalid': $v.confirmPassword.$error}").form-group.input
+						label(for="password-confirm") Confirm Password
+						input(
+							type="password"
+							id="password-confirm"
+							class="form-control"
+							@blur = "$v.confirmPassword.$touch()"
+							v-model="confirmPassword")
+						p(v-if="!$v.confirmPassword.sameAs").register-wrong
+							| Confirm password must match a password</p>
+						div.form-group
+							button(type="submit" :disabled="$v.$invalid").btn.btn-primary.btn-block Register
+			div.border-top.card-body.text-center
+				span.link-margin Have an account?
+				router-link(to="/login" class="signup-link" activeClass="active" tag="a") Log in
 </template>
 
 <script>

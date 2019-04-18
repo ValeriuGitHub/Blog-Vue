@@ -1,19 +1,12 @@
-<template>
-	<div class="story">
-		<div class="story-bg">
-			<div class="container">
-				<div class="story-left">
-					<img src="../../assets/story-img.jpg" alt="" class="story-left__img">
-				</div>
-				<div class="story-right">
-					<h1 class="title title_after-white story-right__title">Our Story</h1>
-					<p class="text story-right__text">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.story
+		div.story-bg
+			div.container
+				div.story-left
+					img(src="../../assets/story-img.jpg" alt="").story-left__img
+				div.story-right
+					h1.title.title_after-white.story-right__title Our Story
+					p.text.story-right__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 </template>
 
 <style lang="scss">

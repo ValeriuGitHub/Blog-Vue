@@ -1,20 +1,15 @@
-<template>
-	<div>
-		<div class="container page__wrapper">
+<template lang="pug">
+	div
+		div.container.page__wrapper
 			<app-post v-for="post in posts" :post="post"></app-post>
-		</div>
-		<div v-if="info" class="container error-wrapper">
-			<div class="error-info">
-				{{ info }}
-			</div>
-		</div>
-		<app-pagination
+		div(v-if="info").container.error-wrapper
+			div.error-info {{ info }}
+		app-pagination(
 			:current="currentPage"
 			:total="totalItems"
 			:per-page="perPage"
 			@page-changed="getPosts"
-		></app-pagination>
-	</div>
+		)
 </template>
 
 <script>

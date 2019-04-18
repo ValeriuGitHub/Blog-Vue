@@ -1,53 +1,43 @@
-<template>
-	<div class="container container-centred">
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-header__title">Sign In</h3>
-			</div>
-			<div class="card-body">
-				<form class="login" @submit.prevent="login">
-					<div class="input-group form-group input" :class="{invalid: $v.email.$error}">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-envelope"></i></span>
-						</div>
-						<input
+<template lang="pug">
+	div.container.container-centred
+		div.card
+			div.card-header
+				h3.card-header__title Sign In
+			div.card-body
+				form(@submit.prevent="login").login
+					div(:class="{invalid: $v.email.$error}").input-group.form-group.input
+						div.input-group-prepend
+							span.input-group-text
+								i.fas.fa-envelope
+						input(
 							type="email"
 							required
 							placeholder="email"
 							class="form-control"
 							@blur = "$v.email.$touch()"
-							v-model="email">
-					</div>
-					<p class="email_wrong" v-if="!$v.email.email">Please provide a valid email address.</p>
-					<div class="input-group form-group input" :class="{invalid: $v.password.$error}">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input
+							v-model="email")
+					p(v-if="!$v.email.email").email_wrong Please provide a valid email address.
+					div(:class="{invalid: $v.password.$error}").input-group.form-group.input
+						div.input-group-prepend
+							span.input-group-text
+								i.fas.fa-key
+						input(
 							type="password"
 							required
 							class="form-control password"
 							placeholder="password"
 							@blur = "$v.password.$touch()"
-							v-model="password">
-					</div>
-					<p class="password_wrong" v-if="!$v.password.minLength">
-					Password shoud have at least {{ $v.password.$params.minLength.min }} character.</p>
-					<p class="password_wrong" v-if="!$v.password.maxLength">
-					Password can't have more than {{ $v.password.$params.maxLength.max }} character.</p>
-					<div class="form-group">
-						<button type="submit" class="btn float-right login_btn" :disabled="$v.$invalid">Login</button>
-					</div>
-				</form>
-			</div>
-			<div class="card-footer">
-				<div class="links">
-					Don't have an account?<router-link to="/register" activeClass="active" class="signup-link links__login" tag="a">Sign up</router-link>
-				</div>
-			</div>
-			<p v-if="status" class="login-wrong"> {{ status }}</p>
-		</div>
-	</div>
+							v-model="password")
+					p(v-if="!$v.password.minLength").password_wrong
+						| Password shoud have at least {{ $v.password.$params.minLength.min }} character
+					p(v-if="!$v.password.maxLength").password_wrong
+						| Password can't have more than {{ $v.password.$params.maxLength.max }} character.
+					div.form-group
+						button(type="submit" :disabled="$v.$invalid").btn.float-right.login_btn Login
+			div.card-footer
+				div.links
+					| Don't have an account?<router-link to="/register" activeClass="active" class="signup-link links__login" tag="a">Sign up</router-link>
+			p(v-if="status").login-wrong {{ status }}
 </template>
 
 <script>

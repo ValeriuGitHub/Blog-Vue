@@ -1,22 +1,14 @@
-<template>
-	<div class="well">
-		<div class="media">
-			<div class="pull-left">
-				<img class="media-object" :src="'http://localhost:8080/' + post.imageUrl">
-			</div>
-			<div class="media-body">
-				<h4 class="media-heading">{{ post.title }}</h4>
-				<p>{{ post.content }}</p>
-				<div class="list-inline list-unstyled">
-					<form @submit.prevent="editPost" class="edit-form">
-						<button class="edit-button" :post="post">
-							Edit
-						</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.well
+		div.media
+			div.pull-left
+				img.media-object(:src="'http://localhost:8080/' + post.imageUrl")
+			div.media-body
+				h4.media-heading {{ post.title }}
+				p {{ post.content }}
+				div.list-inline.list-unstyled
+					form(@submit.prevent="editPost").edit-form
+						button.edit-button(:post="post") Edit
 </template>
 
 <script>

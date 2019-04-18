@@ -1,18 +1,10 @@
-<template>
-	<div class="home-bg">
-		<div class="container-centred">
-			<div class="home">
-				<div class="home-info">
-					<h1 class="home-info__title">
-						Grandrestaurant
-					</h1>
-					<p class="home-info__text">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.home-bg
+		div.container-centred
+			div.home
+				div.home-info
+					h1.home-info__title Grandrestaurant
+					p.home-info__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
 </template>
 
 <style lang="scss">

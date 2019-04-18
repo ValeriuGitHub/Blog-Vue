@@ -1,43 +1,24 @@
-<template id="pagination-template">
-	<div class="pagination">
-		<div class="pagination__left">
-			<a href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)"
-				class="pagination__link">
-				Prev
-			</a>
-		</div>
-		<div class="pagination__mid">
-			<ul class="pagination__mid-list">
-				<li v-if="hasFirst()">
-					<a href="#" @click.prevent="changePage(1)"
-						class="pagination__link">
-						1
-					</a>
-				</li>
-				<li v-if="hasFirst()">...</li>
-				<li v-for="page in pages">
-					<a href="#" @click.prevent="changePage(page)"
-						class="pagination__link"
-						:class="{ current: current == page }">
-						{{ page }}
-					</a>
-				</li>
-				<li v-if="hasLast()">...</li>
-				<li v-if="hasLast()">
-					<a href="#" @click.prevent="changePage(totalPages)"
-					 class="pagination__link">
-						{{ totalPages }}
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="pagination__right">
-			<a href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)"
-				class="pagination__link pagination__right-link">
-					Next
-			</a>
-		</div>
-	</div>
+<template id="pagination-template" lang="pug">
+	div.pagination
+		div.pagination__left
+			a(href="#" v-if="hasPrev()" @click.prevent="changePage(prevPage)"
+				).pagination__link Prev
+		div.pagination__mid
+			ul.pagination__mid-list
+				li(v-if="hasFirst()")
+					a(href="#" @click.prevent="changePage(1)").pagination__link 1
+				li(v-if="hasFirst()") ...
+				li(v-for="page in pages")
+					a(href="#" @click.prevent="changePage(page)"
+						:class="{ current: current == page }").pagination__link
+						| {{ page }}
+				li(v-if="hasLast()") ...
+				li(v-if="hasLast()")
+					a(href="#" @click.prevent="changePage(totalPages)").pagination__link
+						| {{ totalPages }}
+		div.pagination__right
+			a(href="#" v-if="hasNext()" @click.prevent="changePage(nextPage)").pagination__link.pagination__right-link
+				| Next
 </template>
 
 <script>

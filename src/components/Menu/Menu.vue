@@ -1,117 +1,49 @@
-<template>
-	<div class="menu-bg">
-		<div class="container">
-			<div class="menu">
-				<h1 class="title menu__title">Our Menu</h1>
-				<ul class="menu__list">
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								TOASTED BREADS & BEEF DRIPPING BUTTER
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								CLUCK & DUCK WINGS
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								BREAD BOARD PLATTER
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								BEEF & BONE MARROW BON BONS
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								STICKY CHIPOTLE CHICKEN
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								GARLIC KING PRAWNS
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								SALT & PEPPER CALAMARI
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-					<li class="menu__item">
-						<div class="menu-top">
-							<h2 class="menu-top__title">
-								ANTIPASTI PLATE
-							</h2>
-							<div class="menu-top__price">
-								20$
-							</div>
-						</div>
-						<div class="menu__text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+<template lang="pug">
+	div.menu-bg
+		div.container
+			div.menu
+				h1.title.menu__title Our Menu
+				ul.menu__list
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title TOASTED BREADS & BEEF DRIPPING BUTTER
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title CLUCK & DUCK WINGS
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title BREAD BOARD PLATTER
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title BEEF & BONE MARROW BON BONS
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title STICKY CHIPOTLE CHICKEN
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title GARLIC KING PRAWNS
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title SALT & PEPPER CALAMARI
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+					li.menu__item
+						div.menu-top
+							h2.menu-top__title ANTIPASTI PLATE
+							div.menu-top__price 20$
+						div.menu__text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 </template>
 
 <style lang="scss">
