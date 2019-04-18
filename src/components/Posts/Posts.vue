@@ -4,9 +4,9 @@
 			<app-post v-for="post in posts" :post="post"></app-post>
 		</div>
 		<div v-if="info" class="container error-wrapper">
-		  <div class="error-info">
-		  	{{ info }}
-		  </div>
+			<div class="error-info">
+				{{ info }}
+			</div>
 		</div>
 		<app-pagination
 			:current="currentPage"

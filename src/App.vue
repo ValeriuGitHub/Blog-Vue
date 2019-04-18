@@ -27,7 +27,7 @@
 @import './scss/variables.scss';
 
 .container-centred {
-  height: calc(100vh - 50px);
+	height: calc(100vh - 50px);
 	display: flex;
 	align-items: center;
 }
@@ -42,7 +42,9 @@
 		border: 1.5px solid red;
 		color: $orange;
 		width: 300px;
-		margin: 0 auto;
+		position: absolute;
+		left: 10px;
+		top: 60px;
 		text-align: center;
 	}
 }
@@ -50,12 +52,12 @@
 	font-size: 56px;
 	font-family: "ForeverBrushScript";
 	&:after {
-	  content: "";
-	  height: 2px;
-	  width: 110px;
+		content: "";
+		height: 2px;
+		width: 110px;
 		margin: 13px auto 0px;
-	  display: block;
-	  background-color: #c8235d;
+		display: block;
+		background-color: #c8235d;
 	}
 	&_after {
 		&-white {

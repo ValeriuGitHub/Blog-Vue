@@ -17,6 +17,7 @@ const mutations = {
 	},
 	'EDIT_POST'(state, resp) {
 		state.editPost = resp.data;
+		state.info = ''
 	},
 	'EDIT_POST_ERROR'(state, resp) {
 		state.info = "We can't download this page maybe something with conection or server..."

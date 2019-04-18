@@ -21,7 +21,7 @@ const mutations = {
 		state.user = userData.user
 	},
 	'AUTH_ERROR'(state){
-		state.status = "This account is not registered (wrong email or password)."
+		state.status = "This account is not registered (wrong email or password) or problem with server."
 	},
 	'LOGOUT'(state){
 		state.status = ''

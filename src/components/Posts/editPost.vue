@@ -1,6 +1,11 @@
 <template>
 	<div class="container container-centred">
 		<div class="card card-edit edit-card">
+			<div v-if="info" class="container error-wrapper">
+				<div class="error-info">
+					{{ info }}
+				</div>
+			</div>
 			<div class="card-header edit-header">
 				<h3>Edit Post</h3>
 				<form @submit.prevent="deletePost" class="edit-remove__container">
@@ -84,6 +89,9 @@
 		computed: {
 			editPost() {
 				return this.$store.getters.editPost.post;
+			},
+			info() {
+				return this.$store.getters.info
 			}
 		},
 		methods: {
