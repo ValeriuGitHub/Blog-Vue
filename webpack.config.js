@@ -25,6 +25,21 @@ module.exports = {
         exclude: /node_modules/
       },
       {
+        test: /\.(png|svg|jpg|gif|jpeg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'img'
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+          }
+        ],
+      },
+      {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: {
           loader: 'file-loader',
@@ -33,13 +48,6 @@ module.exports = {
             outputPath: 'fonts'
           }
         },
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
       }
     ]
   },
