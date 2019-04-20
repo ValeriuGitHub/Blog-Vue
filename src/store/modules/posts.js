@@ -94,7 +94,7 @@ const actions = {
 			})
 			.catch(err => {
 				alert("You can't change this, cause it's not your post!")
-				commit('СHANGE_POST_ERROR')
+				commit('CHANGE_POST_ERROR')
 				throw err
 			})
 	},

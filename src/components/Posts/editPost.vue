@@ -11,20 +11,12 @@
 				form(@submit.prevent="changePost")
 					input(
 						type="text" name="title" id="title" autocomplete="off"
-						:placeholder="editPost.title"
-						:class="{invalid: $v.title.$error}"
-						@blur = "$v.title.$touch()"
 						class="edit-title input-title input-title_big"
-						v-model="title")
-					p(v-if="$v.title.$error").edit-title__wrong Title can't be empty
+						v-model="editPost.title")
 					textarea(
 						name="message" id="message" class="edit-content post-message  post-message_big"
 						cols="30" rows="10"
-						:class="{invalid: $v.content.$error}"
-						@blur = "$v.content.$touch()"
-						:placeholder="editPost.content"
-						v-model="content")
-					p(v-if="$v.content.$error").edit-content__wrong Message can't be empty
+						v-model="editPost.content")
 					div.form-group.file-submit
 						div.file-group
 							input(
@@ -41,7 +33,7 @@
 							<span>Choose another file…</span></label>
 						button(
 							type="submit"
-							:disabled="disabled || $v.$invalid"
+							:disabled="disabled"
 							class="btn float-right login_btn login_btn_big")
 							| Change Post
 			div.border-top.card-body.text-center
@@ -49,8 +41,6 @@
 </template>
 
 <script>
-	import { required } from 'vuelidate/lib/validators'
-
 	export default {
 		data() {
 			return {
@@ -58,14 +48,6 @@
 				content: '',
 				disabled: true,
 				files: []
-			}
-		},
-		validations: {
-			content: {
-				required
-			},
-			title: {
-				required
 			}
 		},
 		computed: {
@@ -84,8 +66,8 @@
 			changePost() {
 				this.previewFiles()
 				let formData = new FormData();
-				formData.append("title", this.title);
-				formData.append("content", this.content);
+				formData.append("title", this.editPost.title);
+				formData.append("content", this.editPost.content);
 				formData.append("image", this.files[0]);
 				this.$store.dispatch('changePost', {
 					formData: formData,
