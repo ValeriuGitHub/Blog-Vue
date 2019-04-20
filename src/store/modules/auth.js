@@ -76,6 +76,7 @@ const actions = {
 					user: user,
 					userId: userId
 				})
+				router.push('/login')
 				localStorage.setItem('token', token)
 				axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 				const now = new Date()

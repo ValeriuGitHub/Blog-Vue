@@ -2,7 +2,7 @@
 	div.well
 		div.media
 			div.pull-left
-				img.media-object(:src="'http://localhost:8080/' + post.imageUrl")
+				img.media-object(:src="'https://test-api-04-19.herokuapp.com/' + post.imageUrl")
 			div.media-body
 				h4.media-heading {{ post.title }}
 				p {{ post.content }}

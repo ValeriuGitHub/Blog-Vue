@@ -10,7 +10,7 @@ const state = {
 
 const mutations = {
 	'POST_MESSAGE'(state, resp) {
-		state.posts.posts.push(resp.data.post)
+		state.posts.posts.unshift(resp.data.post)
 	},
 	'POST_MESSAGE_ERROR'(state, resp) {
 		state.info = "You can't post message now, maybe there are some deal with conection or server"

@@ -2,5 +2,5 @@ import axios from "axios";
 import Vue from 'vue';
 
 export default {
-	publicPath: axios.defaults.baseURL = 'http://localhost:8080'
+	publicPath: axios.defaults.baseURL = 'https://test-api-04-19.herokuapp.com/'
 }
